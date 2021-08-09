@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">DiceRoller</string>
+    <string name="title_activity_dice_roll">DiceRollActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_roll">RollActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="choose_your_dice">Choose your Dice</string>
+    <string name="add_custom_dice">Add Custom Dice</string>
+    <string name="clear">Clear</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="number_of_sides">Number of sides</string>
+    <string name="enter_the_sides_of_custom_dice_max_250">Enter the sides of Custom dice (Max 250)</string>
 </resources>

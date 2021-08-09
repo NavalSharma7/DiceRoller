@@ -1,8 +1,12 @@
 package com.example.diceroller;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.*;
 import java.lang. *;
 
-public class Dice {
+public class Dice implements Parcelable {
     /*
     Naval Sharma
     A00241484
@@ -82,5 +86,38 @@ public class Dice {
         public void roll(){
             setCurrentSideUp((int) (Math.random() * (numberOfSides - 1)) + 1);
         }
+
+
+
+        //Parcelable methods ..
+
+    public  static final Parcelable.Creator<Dice> CREATOR = new Creator<Dice>() {
+        @Override
+        public Dice createFromParcel(Parcel source) {
+            return new Dice(source);
+        }
+
+        @Override
+        public Dice[] newArray(int size) {
+            return new Dice[0];
+        }
+    };
+    public  Dice(Parcel parcel){
+            parcel.writeString(type);
+            parcel.writeInt(numberOfSides);
+            parcel.writeInt(currentSideUp);
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(type);
+            dest.writeInt(numberOfSides);
+            dest.writeInt(currentSideUp);
+    }
+}
 
