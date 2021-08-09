@@ -5,14 +5,24 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements DiceAdapter.clickItemListener {
 
 
     // private variables.
     private DiceAdapter mAdapter;
+    private ArrayList<Dice> mDiceList;
     public String TAG_ROLL_DICE = "tag_roll_dice";
 
     @Override
@@ -25,9 +35,16 @@ public class MainActivity extends AppCompatActivity implements DiceAdapter.click
 
     private void init() {
         RecyclerView dicesView = new RecyclerView(this);
+        // get the dices data from shared preferences
+        loadData();
+
+        //get the dice list save data once to add default dice lists to the shared preferences.
+        mDiceList = DataModel.getDiceList();
+        saveData();
+
         dicesView = findViewById(R.id.rv_dices);
         //set the adapter
-        mAdapter = new DiceAdapter(this, DataModel.getDiceList());
+        mAdapter = new DiceAdapter(this, mDiceList);
 
         dicesView.setAdapter(mAdapter);
        // mAdapter.setDiceList(DataModel.getOrderList());
@@ -42,6 +59,21 @@ public class MainActivity extends AppCompatActivity implements DiceAdapter.click
                 CustomDiceDialog customDiceDialog = CustomDiceDialog.newInstance();
                 customDiceDialog.show(fm, "fragment_custom_dice");
 
+
+                // add the value in mdicelist and save it in preferences and refresh recycler view
+                mDiceList.add(new Dice(8));
+                // set the value in recycler view an refresh..
+                mAdapter.setDiceList(mDiceList);
+
+
+            }
+        });
+
+        findViewById(R.id.btn_clear).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // clear the custom dices from shared preferences ..
+                clearData();
             }
         });
     }
@@ -59,5 +91,85 @@ public class MainActivity extends AppCompatActivity implements DiceAdapter.click
         i.putExtra(TAG_ROLL_DICE, die);
         startActivity(i);
 
+    }
+
+    // shared preferences methods
+    private void loadData() {
+        // method to load arraylist from shared prefs
+        // initializing our shared prefs with name as
+        // shared preferences.
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+
+        // creating a variable for gson.
+        Gson gson = new Gson();
+
+        // below line is to get to string present from our
+        // shared prefs if not present setting it as null.
+        String json = sharedPreferences.getString("dices", null);
+
+        // below line is to get the type of our array list.
+        Type type = new TypeToken<ArrayList<Dice>>() {}.getType();
+
+        // in below line we are getting data from gson
+        // and saving it to our array list
+        mDiceList = gson.fromJson(json, type);
+
+        // checking below if the array list is empty or not
+        if (mDiceList == null) {
+            // if the array list is empty
+            // creating a new array list.
+            mDiceList = new ArrayList<>();
+        }
+    }
+
+    private void saveData() {
+        // method for saving the data in array list.
+        // creating a variable for storing data in
+        // shared preferences.
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+
+        // creating a variable for editor to
+        // store data in shared preferences.
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // creating a new variable for gson.
+        Gson gson = new Gson();
+
+        // getting data from gson and storing it in a string.
+        String json = gson.toJson(mDiceList);
+
+        // below line is to save data in shared
+        // prefs in the form of string.
+        editor.putString("dices", json);
+
+        // below line is to apply changes
+        // and save data in shared prefs.
+        editor.apply();
+
+        // after saving data we are displaying a toast message.
+        Toast.makeText(this, "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
+    }
+
+    private void clearData(){
+
+        // get the default list from data model and change the list as it will remove any ctsom added dices
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+
+       // get the list from datamodel with default values
+        mDiceList = DataModel.getDiceList();
+        // getting data from gson and storing it in a string.
+        String json = gson.toJson(mDiceList);
+
+        // below line is to save data in shared
+        // prefs in the form of string.
+        editor.putString("dices", json);
+
+        // below line is to apply changes
+        // and save data in shared prefs.
+        editor.apply();
+        // set the value in recycler view an refresh..
+        mAdapter.setDiceList(mDiceList);
     }
 }

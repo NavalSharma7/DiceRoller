@@ -7,12 +7,12 @@ public class DataModel {
     public static ArrayList<Dice> getDiceList() {
 
         ArrayList<Dice> dices = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Dice die = new Dice();
-            die.setNumOfSides(10);
-            die.setType("d10");
-            dices.add(die);
-        }
+            dices.add(new Dice(4));
+            dices.add(new Dice(6));
+            dices.add(new Dice(8));
+            dices.add(new Dice(10));
+            dices.add(new Dice(12));
+            dices.add(new Dice(20));
 
         return dices;
     }
