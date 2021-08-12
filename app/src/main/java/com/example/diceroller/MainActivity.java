@@ -15,9 +15,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements DiceAdapter.clickItemListener {
+public class MainActivity extends AppCompatActivity implements CustomDiceDialog.OnInputListener {
 
 
     // private variables.
@@ -44,7 +43,17 @@ public class MainActivity extends AppCompatActivity implements DiceAdapter.click
 
         dicesView = findViewById(R.id.rv_dices);
         //set the adapter
-        mAdapter = new DiceAdapter(this, mDiceList);
+        mAdapter = new DiceAdapter(this, mDiceList, new DiceAdapter.clickItemListener() {
+            @Override
+            public void onClickItem(Dice die) {
+                // send the dice to the rolling screen to ask for input and show roll results.
+                if (die == null)
+                    return;
+                Intent intent = new Intent(MainActivity.this, DiceRollActivity.class);
+                intent.putExtra(TAG_ROLL_DICE, die);
+                startActivity(intent);
+            }
+        });
 
         dicesView.setAdapter(mAdapter);
        // mAdapter.setDiceList(DataModel.getOrderList());
@@ -76,22 +85,16 @@ public class MainActivity extends AppCompatActivity implements DiceAdapter.click
                 clearData();
             }
         });
+        findViewById(R.id.btn_show_roll_history).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // call roll history activity...
+                callRollHistoryActivity();
+            }
+        });
     }
 
-    // implement interface methods
 
-
-    @Override
-    public void onClickItem(Dice die) {
-        // send the dice to the rolling screen to ask for input and show roll results.
-        if (die == null)
-            return;
-        String type = die.getType();
-        Intent i = new Intent(MainActivity.this, DiceRollActivity.class);
-        i.putExtra(TAG_ROLL_DICE, die);
-        startActivity(i);
-
-    }
 
     // shared preferences methods
     private void loadData() {
@@ -171,5 +174,23 @@ public class MainActivity extends AppCompatActivity implements DiceAdapter.click
         editor.apply();
         // set the value in recycler view an refresh..
         mAdapter.setDiceList(mDiceList);
+    }
+
+
+    //Custom dice dialog methods
+
+    @Override
+    public void sendInput(String numOfSides) {
+        int numSides = Integer.parseInt(numOfSides);
+        Dice die = new Dice(numSides);
+        mDiceList.add(die);
+        saveData();
+        mAdapter.setDiceList(mDiceList);
+
+    }
+
+    private void callRollHistoryActivity(){
+        Intent intent = new Intent(MainActivity.this, RollHistoryActivity.class);
+        startActivity(intent);
     }
 }

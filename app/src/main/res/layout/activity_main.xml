@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/parent_background_color"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tv_header_main"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        style="@style/LargeOrangeFont"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:text="@string/choose_your_dice" />
 
@@ -17,10 +20,22 @@
         android:id="@+id/rv_dices"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/btn_show_roll_history"
         android:layout_below="@+id/tv_header_main"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/view_dice_adapter_item" />
+
+    <Button
+        android:id="@+id/btn_show_roll_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/CustomButton"
+        android:layout_above="@+id/ll_buttons_bottom"
+        android:text="@string/show_rolling_history" />
 
     <LinearLayout
+        android:id="@+id/ll_buttons_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -32,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="50"
+            style="@style/CustomButton"
             android:text="@string/add_custom_dice" />
 
         <Button
@@ -39,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="50"
+            style="@style/CustomButton"
             android:text="@string/clear" />
     </LinearLayout>
 </RelativeLayout>

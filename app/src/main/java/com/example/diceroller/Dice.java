@@ -1,10 +1,11 @@
 package com.example.diceroller;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.util.*;
-import java.lang. *;
+import java.lang.*;
 
 public class Dice implements Parcelable {
     /*
@@ -16,82 +17,81 @@ public class Dice implements Parcelable {
 */
 
 
+    // data fields to describe the die..
 
-        // data fields to describe the die..
+    private String type;
+    private int numberOfSides;
+    private int currentSideUp;
 
-        private String type;
-        private int numberOfSides;
-        private int currentSideUp;
+    // constructors..
 
-        // constructors..
+    //constructor with no argument sets the numberOfSides as 6 default and the type d6
+    //to that and gives a ramdom value to the currentSideUp
 
-        //constructor with no argument sets the numberOfSides as 6 default and the type d6
-        //to that and gives a ramdom value to the currentSideUp
+    public Dice() {
+        this.type = "d6";
+        this.numberOfSides = 6;
+        this.currentSideUp = (int) (Math.random() * (6 - 1)) + 1;
+    }
 
-        public Dice(){
-            this.type = "d6";
-            this.numberOfSides = 6;
-            this.currentSideUp = (int) (Math.random() * (6 - 1)) + 1;
-        }
+    //constructor with one argument sets the numberOfSides and the type accroding
+    //to that and givees a ramdom value to the currentSideUp
 
-        //constructor with one argument sets the numberOfSides and the type accroding
-        //to that and givees a ramdom value to the currentSideUp
+    public Dice(int numberOfSides) {
+        this.numberOfSides = numberOfSides;
+        this.type = "d" + numberOfSides;
+        this.currentSideUp = (int) (Math.random() * (numberOfSides - 1)) + 1;
+    }
 
-        public Dice(int numberOfSides){
-            this.numberOfSides = numberOfSides;
-            this.type = "d" + numberOfSides;
-            this.currentSideUp = (int) (Math.random() * (numberOfSides - 1)) + 1;
-        }
+    //constructor with two argument sets the numberOfSides and the type
+    //to that and gives a ramdom value to the currentSideUp..
 
-        //constructor with two argument sets the numberOfSides and the type
-        //to that and gives a ramdom value to the currentSideUp..
-
-        public Dice(String type, int numberOfSides){
-            this.type = type;
-            this. numberOfSides = numberOfSides;
-            this.currentSideUp = (int) (Math.random() * (numberOfSides - 1)) + 1;
-        }
-
-
-        //accessors and mutators methods for type, numberOfSides,currentSideUp..
-        public String getType(){
-            return type;
-        }
-
-        public int getNumOfSides(){
-            return numberOfSides;
-        }
-        public int getCurrentSideUp(){
-            return currentSideUp;
-        }
-
-        public void setType(String type){
-            this.type = type;
-        }
-
-        // set the type according as we set the number of sides
-        public void setNumOfSides(int numberOfSides){
-            this.numberOfSides = numberOfSides;
-            this.type = "d" + numberOfSides;
-        }
+    public Dice(String type, int numberOfSides) {
+        this.type = type;
+        this.numberOfSides = numberOfSides;
+        this.currentSideUp = (int) (Math.random() * (numberOfSides - 1)) + 1;
+    }
 
 
-        public void setCurrentSideUp(int currentSideUp){
-            this.currentSideUp = currentSideUp;
-        }
+    //accessors and mutators methods for type, numberOfSides,currentSideUp..
+    public String getType() {
+        return type;
+    }
+
+    public int getNumOfSides() {
+        return numberOfSides;
+    }
+
+    public int getCurrentSideUp() {
+        return currentSideUp;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    // set the type according as we set the number of sides
+    public void setNumOfSides(int numberOfSides) {
+        this.numberOfSides = numberOfSides;
+        this.type = "d" + numberOfSides;
+    }
 
 
-        // the roll method which generates a ramdom value between 1 and numberOfSides
-        //and assigns that as the currentSideup..
-        public void roll(){
-            setCurrentSideUp((int) (Math.random() * (numberOfSides - 1)) + 1);
-        }
+    public void setCurrentSideUp(int currentSideUp) {
+        this.currentSideUp = currentSideUp;
+    }
 
 
+    // the roll method which generates a ramdom value between 1 and numberOfSides
+    //and assigns that as the currentSideup..
+    public void roll() {
+        setCurrentSideUp((int) (Math.random() * (numberOfSides - 1)) + 1);
+    }
 
-        //Parcelable methods ..
 
-    public  static final Parcelable.Creator<Dice> CREATOR = new Creator<Dice>() {
+    //Parcelable methods ..
+
+    public static final Parcelable.Creator<Dice> CREATOR = new Creator<Dice>() {
         @Override
         public Dice createFromParcel(Parcel source) {
             return new Dice(source);
@@ -102,10 +102,11 @@ public class Dice implements Parcelable {
             return new Dice[0];
         }
     };
-    public  Dice(Parcel parcel){
-            parcel.writeString(type);
-            parcel.writeInt(numberOfSides);
-            parcel.writeInt(currentSideUp);
+
+    public Dice(Parcel parcel) {
+        this.type = parcel.readString();
+        this.numberOfSides = parcel.readInt();
+        this.currentSideUp = parcel.readInt();
     }
 
     @Override
@@ -115,9 +116,9 @@ public class Dice implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(type);
-            dest.writeInt(numberOfSides);
-            dest.writeInt(currentSideUp);
+        dest.writeString(type);
+        dest.writeInt(numberOfSides);
+        dest.writeInt(currentSideUp);
     }
 }
 

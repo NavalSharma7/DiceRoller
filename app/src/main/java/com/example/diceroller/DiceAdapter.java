@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -17,7 +16,7 @@ public class DiceAdapter extends RecyclerView.Adapter<DiceAdapter.DiceViewHolder
     private Context mContext;
     //order list
     private ArrayList<Dice> mDiceList;
-    private clickItemListener mCLickListener;
+    private clickItemListener mClickListener;
 
     //interface to interact with main activity..
 
@@ -31,9 +30,10 @@ public class DiceAdapter extends RecyclerView.Adapter<DiceAdapter.DiceViewHolder
 
     //constructor
 
-    public DiceAdapter(Context mContext, ArrayList<Dice> mDIceList) {
+    public DiceAdapter(Context mContext, ArrayList<Dice> mDIceList,clickItemListener listener) {
         this.mContext = mContext;
         this.mDiceList = mDIceList;
+        this.mClickListener = listener;
         notifyDataSetChanged();
     }
 
@@ -59,21 +59,16 @@ public class DiceAdapter extends RecyclerView.Adapter<DiceAdapter.DiceViewHolder
             @Override
             public void onClick(View v) {
                 // call interface method for item view click
-                mCLickListener.onClickItem(die);
+                if(mClickListener ==null)
+                    return;
+                mClickListener.onClickItem(die);
             }
         });
 
 
-        // set the values to he view of each item from each orderinfo item
-//        holder.choice1.setText(info.getBreadEnum().getDisplayName());
-//        holder.choice2.setText(info.getCheeseEnum().getDisplayName());
-//        holder.choice3.setText(info.getSauceEnum().getDisplayName());
-//        holder.choice4.setText(info.getToppings().get(0));
-//        double amount =info.getAmount();
-//        DecimalFormat precision = new DecimalFormat("0.00");
-//        holder.amountView.setText(String.format("$ %s",precision.format(amount)));
-//        holder.dateView.setText(info.getOrderDate());
-
+        // set the values to he view of each item from each Die item
+        holder.diceTypeView.setText(die.getType());
+//
     }
 
     @Override
@@ -86,12 +81,14 @@ public class DiceAdapter extends RecyclerView.Adapter<DiceAdapter.DiceViewHolder
 
 
         CardView cardView;
+        TextView diceTypeView;
 
         public DiceViewHolder(View itemView) {
             super(itemView);
             // initialize your views in 1 order item
             cardView = itemView.findViewById(R.id.parent_view_adapter_item);
-//
+            diceTypeView = itemView.findViewById(R.id.tv_dice_type);
+
 
 
         }

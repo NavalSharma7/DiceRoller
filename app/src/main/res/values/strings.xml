@@ -18,5 +18,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="number_of_sides">Number of sides</string>
-    <string name="enter_the_sides_of_custom_dice_max_250">Enter the sides of Custom dice (Max 250)</string>
+    <string name="enter_the_sides_of_custom_dice_max_250">Enter the sides of Custom dice</string>
+    <string name="show_rolling_history">SHOW ROLLING HISTORY</string>
+    <string name="clear_rolling_history">Clear rolling history</string>
+    <string name="no_rolling_history_please_roll_dices_to_see">NO ROLLING HISTORY PLEASE ROLL DICES TO SEE</string>
+    <string name="rolling_history">Rolling History</string>
+    <string name="you_have_chosen_a">You have chosen a</string>
+    <string name="choose_how_many_times_to_roll">CHOOSE HOW MANY TIMES TO ROLL</string>
+    <string name="roll_once">ROLL ONCE</string>
+    <string name="roll_twice">ROLL TWICE</string>
+    <string name="second_rolled_value">Second Rolled Value</string>
+    <string name="first_rolled_value">First Rolled Value</string>
+    <string name="roll">ROLL</string>
 </resources>

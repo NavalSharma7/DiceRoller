@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/parent_background_color"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv_header_rolling_history"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        style="@style/LargeOrangeFont"
+        android:text="@string/rolling_history" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/tv_header_rolling_history"
+        android:layout_above="@+id/btn_clear_history"
+        android:text="@string/no_rolling_history_please_roll_dices_to_see"
+        android:layout_height="match_parent"
+        style="@style/LargeBlackFont"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/tv_no_roll_history"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_dices_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_clear_history"
+        android:layout_below="@+id/tv_header_rolling_history"
+        android:layout_marginTop="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/view_roll_history_adapter" />
+
+    <Button
+        android:id="@+id/btn_clear_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        style="@style/CustomButton"
+        android:text="@string/clear_rolling_history" />
+
+
+</RelativeLayout>

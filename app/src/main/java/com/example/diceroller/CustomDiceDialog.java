@@ -1,5 +1,6 @@
 package com.example.diceroller;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,13 +8,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.jetbrains.annotations.NotNull;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,9 +33,17 @@ public class CustomDiceDialog extends DialogFragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public interface OnInputListener {
+        void sendInput(String numOfSides);
+    }
+
+    public OnInputListener onInputListener;
+
+    // widgets
     private EditText mEditText;
+
+    private TextView mActionOk, mActionCancel;
+
 
     public CustomDiceDialog() {
         // Required empty public constructor
@@ -59,7 +72,32 @@ public class CustomDiceDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_custom_dice_dialog, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_custom_dice_dialog, container, false);
+        mActionCancel = view.findViewById(R.id.action_cancel);
+        mActionOk = view.findViewById(R.id.action_ok);
+        mEditText = view.findViewById(R.id.et_num_sides);
+
+        mActionCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: closing dialog");
+                getDialog().dismiss();
+            }
+        });
+
+        mActionOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String input = mEditText.getText().toString();
+                onInputListener.sendInput(input);
+                getDialog().dismiss();
+
+            }
+        });
+
+        return view;
     }
 
     @Override
@@ -72,4 +110,16 @@ public class CustomDiceDialog extends DialogFragment {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
     }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            onInputListener = (OnInputListener) getActivity();
+        } catch (ClassCastException e) {
+            Log.e(TAG, "onAttach: " + e.getMessage());
+        }
+    }
+
 }

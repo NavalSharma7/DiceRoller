@@ -4,74 +4,121 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="100"
+    android:background="@color/parent_background_color"
     android:orientation="vertical"
+    android:weightSum="100"
     tools:context=".DiceRollActivity">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_weight="5"
-    android:id="@+id/tv_label_dice_value"
-    android:layout_height="wrap_content"
-    android:text="You have choosen a "/>
+
     <TextView
+        android:id="@+id/tv_label_dice_value"
+        style="@style/LargeOrangeFont"
         android:layout_width="match_parent"
-        android:layout_weight="5"
         android:layout_height="wrap_content"
-        android:text="CHOOSE HOW MANY TIMES TO ROLL"/>
+        android:layout_gravity="center"
+
+        android:layout_weight="5"
+        android:gravity="center"
+        android:text="@string/you_have_chosen_a" />
+
+    <TextView
+        style="@style/LargeOrangeFont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:text="@string/choose_how_many_times_to_roll" />
+
     <RadioGroup
         android:id="@+id/rg_dice_rolls"
-        android:layout_weight="40"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:backgroundTint="@color/dark_orange">
 
         <RadioButton
             android:id="@+id/rb_roll_once"
             android:layout_width="match_parent"
-            android:text="ROLL ONCE"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/dark_orange"
+            android:checked="true"
+            android:text="@string/roll_once" />
+
         <RadioButton
+            android:id="@+id/rb_roll_twice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ROLL TWICE"
-            android:id="@+id/rb_roll_twice"/>
+            android:buttonTint="@color/dark_orange"
+            android:text="@string/roll_twice" />
     </RadioGroup>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:layout_margin="10dp"
-    android:layout_weight="40"
-    android:weightSum="100"
-    android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4"
-        android:layout_gravity="center"
-        android:layout_weight="50"
-        android:visibility="invisible"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:id="@+id/tv_value_first_roll"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4"
-        android:layout_weight="50"
-        android:visibility="invisible"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:id="@+id/tv_value_second_roll"
-        />
-</LinearLayout>
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="10"
+        android:layout_margin="10dp"
+        android:layout_weight="40"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <TextView
+                style="@style/LargeOrangeFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/first_rolled_value" />
+
+            <TextView
+                android:id="@+id/tv_value_first_roll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                style="@style/LargeBlackFont" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_second_roll_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:weightSum="100">
+
+            <TextView
+                style="@style/LargeOrangeFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/second_rolled_value"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <TextView
+                android:id="@+id/tv_value_second_roll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                style="@style/LargeBlackFont" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
         android:id="@+id/btn_roll"
+        style="@style/CustomButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="ROLL"/>
+        android:layout_weight="10"
+        android:text="@string/roll" />
 
 </LinearLayout>
