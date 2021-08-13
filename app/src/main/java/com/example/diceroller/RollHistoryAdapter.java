@@ -54,7 +54,7 @@ public class RollHistoryAdapter extends RecyclerView.Adapter<RollHistoryAdapter.
             if(!TextUtils.isEmpty(type))
             holder.diceTypeView.setText(type);
             List<Integer> values = info.getValues();
-            holder.diceRollValues.setText(String.format("THe rolled Values are %s",values.toString()));
+            holder.diceRollValues.setText(String.format("PAST VALUES: %s",values.toString()));
         }
     }
 

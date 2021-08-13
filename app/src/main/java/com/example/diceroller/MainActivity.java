@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,10 +36,13 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
     private void init() {
         RecyclerView dicesView = new RecyclerView(this);
         // get the dices data from shared preferences
-        loadData();
 
         //get the dice list save data once to add default dice lists to the shared preferences.
         mDiceList = DataModel.getDiceList();
+
+        loadData();
+
+        // save the default dices in the shared preferences.
         saveData();
 
         dicesView = findViewById(R.id.rv_dices);
@@ -56,10 +60,11 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
         });
 
         dicesView.setAdapter(mAdapter);
-       // mAdapter.setDiceList(DataModel.getOrderList());
+        // mAdapter.setDiceList(DataModel.getOrderList());
         mAdapter.notifyDataSetChanged();
     }
-    private void initListeners(){
+
+    private void initListeners() {
         findViewById(R.id.btn_add_custom_dice).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,10 +74,7 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
                 customDiceDialog.show(fm, "fragment_custom_dice");
 
 
-                // add the value in mdicelist and save it in preferences and refresh recycler view
-                mDiceList.add(new Dice(8));
-                // set the value in recycler view an refresh..
-                mAdapter.setDiceList(mDiceList);
+
 
 
             }
@@ -95,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
     }
 
 
-
     // shared preferences methods
     private void loadData() {
         // method to load arraylist from shared prefs
@@ -111,7 +112,8 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
         String json = sharedPreferences.getString("dices", null);
 
         // below line is to get the type of our array list.
-        Type type = new TypeToken<ArrayList<Dice>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Dice>>() {
+        }.getType();
 
         // in below line we are getting data from gson
         // and saving it to our array list
@@ -153,14 +155,14 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
         Toast.makeText(this, "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
     }
 
-    private void clearData(){
+    private void clearData() {
 
         // get the default list from data model and change the list as it will remove any ctsom added dices
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
 
-       // get the list from datamodel with default values
+        // get the list from datamodel with default values
         mDiceList = DataModel.getDiceList();
         // getting data from gson and storing it in a string.
         String json = gson.toJson(mDiceList);
@@ -181,15 +183,17 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
 
     @Override
     public void sendInput(String numOfSides) {
-        int numSides = Integer.parseInt(numOfSides);
-        Dice die = new Dice(numSides);
-        mDiceList.add(die);
-        saveData();
-        mAdapter.setDiceList(mDiceList);
+        if (!TextUtils.isEmpty(numOfSides)) {
+            int numSides = Integer.parseInt(numOfSides);
+            Dice die = new Dice(numSides);
+            mDiceList.add(die);
+            saveData();
+            mAdapter.setDiceList(mDiceList);
+        }
 
     }
 
-    private void callRollHistoryActivity(){
+    private void callRollHistoryActivity() {
         Intent intent = new Intent(MainActivity.this, RollHistoryActivity.class);
         startActivity(intent);
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/parent_background_color"
+    style="@style/background"
     android:orientation="vertical"
     android:weightSum="100"
     tools:context=".DiceRollActivity">
@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-
         android:layout_weight="5"
         android:gravity="center"
         android:text="@string/you_have_chosen_a" />
@@ -32,21 +31,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="40"
-        android:backgroundTint="@color/dark_orange">
+       >
 
         <RadioButton
             android:id="@+id/rb_roll_once"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/dark_orange"
             android:checked="true"
+            style="@style/RadioButtonStyle"
             android:text="@string/roll_once" />
 
         <RadioButton
             android:id="@+id/rb_roll_twice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/dark_orange"
+            style="@style/RadioButtonStyle"
             android:text="@string/roll_twice" />
     </RadioGroup>
 

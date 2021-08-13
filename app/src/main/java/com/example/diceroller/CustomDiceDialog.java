@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,9 +92,10 @@ public class CustomDiceDialog extends DialogFragment {
             public void onClick(View v) {
 
                 String input = mEditText.getText().toString();
-                onInputListener.sendInput(input);
-                getDialog().dismiss();
-
+                if(!TextUtils.isEmpty(input)) {
+                    onInputListener.sendInput(input);
+                    getDialog().dismiss();
+                }
             }
         });
 

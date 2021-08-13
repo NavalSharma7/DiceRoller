@@ -29,7 +29,7 @@ public class Dice implements Parcelable {
     //to that and gives a ramdom value to the currentSideUp
 
     public Dice() {
-        this.type = "d6";
+        this.type = "D6";
         this.numberOfSides = 6;
         this.currentSideUp = (int) (Math.random() * (6 - 1)) + 1;
     }
@@ -39,7 +39,7 @@ public class Dice implements Parcelable {
 
     public Dice(int numberOfSides) {
         this.numberOfSides = numberOfSides;
-        this.type = "d" + numberOfSides;
+        this.type = "D" + numberOfSides;
         this.currentSideUp = (int) (Math.random() * (numberOfSides - 1)) + 1;
     }
 

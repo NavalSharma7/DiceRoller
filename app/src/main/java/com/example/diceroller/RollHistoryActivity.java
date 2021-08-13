@@ -74,8 +74,7 @@ public class RollHistoryActivity extends AppCompatActivity {
         String json = sharedPreferences.getString("roll_info", null);
 
         // below line is to get the type of our array list.
-        Type type = new TypeToken<HashMap<Integer, ArrayList<Integer>>>() {
-        }.getType();
+        Type type = new TypeToken<HashMap<Integer, ArrayList<Integer>>>() {}.getType();
 
         // in below line we are getting data from gson
         // and saving it to our array list
@@ -108,7 +107,7 @@ public class RollHistoryActivity extends AppCompatActivity {
     }
 
     private void clearHistory() {
-        PreferenceManager.getDefaultSharedPreferences(this).edit().remove("roll_info").apply();
+        PreferenceManager.getDefaultSharedPreferences(this).edit().clear().apply();
         loadHistory();
         adapter.setDiceList(mRollInfoList);
         adapter.notifyDataSetChanged();
