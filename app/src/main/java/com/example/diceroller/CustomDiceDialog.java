@@ -83,6 +83,7 @@ public class CustomDiceDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: closing dialog");
+                // close the dialog
                 getDialog().dismiss();
             }
         });
@@ -94,6 +95,7 @@ public class CustomDiceDialog extends DialogFragment {
                 String input = mEditText.getText().toString();
                 if(!TextUtils.isEmpty(input)) {
                     onInputListener.sendInput(input);
+                    //close the dialog after input received
                     getDialog().dismiss();
                 }
             }

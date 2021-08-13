@@ -79,11 +79,9 @@ public class RollHistoryAdapter extends RecyclerView.Adapter<RollHistoryAdapter.
             diceTypeView = itemView.findViewById(R.id.tv_history_type);
             diceRollValues = itemView.findViewById(R.id.tv_values_history);
 
-
-
         }
     }
-
+// set data method
     public void setDiceList(ArrayList<DiceRollInfo> diceList){
         this.mDiceRollInfo =diceList;
         notifyDataSetChanged();

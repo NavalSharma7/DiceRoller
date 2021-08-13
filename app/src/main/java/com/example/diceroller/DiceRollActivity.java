@@ -68,6 +68,7 @@ public class DiceRollActivity extends AppCompatActivity {
         if (mDice == null)
             return;
         label.setText(String.format("You have chosen a %s Dice", mDice.getType()));
+        // change the visibility of the view depending on the radio button choice.
         rollChoiceGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -162,13 +163,14 @@ public class DiceRollActivity extends AppCompatActivity {
 
 
     public <T> void setList(String key, HashMap<Integer,ArrayList<Integer>> list) {
-
+        // set the list as hashmap in shared preferences.
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(list);
         editor.putString(key, json);
+        editor.apply();
         editor.commit();
     }
 }

@@ -179,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
     @Override
     public void sendInput(String numOfSides) {
         if (!TextUtils.isEmpty(numOfSides)) {
+            // input from the dialog needs to be added to list of dices
             int numSides = Integer.parseInt(numOfSides);
             Dice die = new Dice(numSides);
             mDiceList.add(die);
@@ -189,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
     }
 
     private void callRollHistoryActivity() {
+      //  call the roll history activity
         Intent intent = new Intent(MainActivity.this, RollHistoryActivity.class);
         startActivity(intent);
     }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class DataModel {
 
     public static ArrayList<Dice> getDiceList() {
-
+// default dices values to get started with on the main screen
         ArrayList<Dice> dices = new ArrayList<>();
             dices.add(new Dice(4));
             dices.add(new Dice(6));

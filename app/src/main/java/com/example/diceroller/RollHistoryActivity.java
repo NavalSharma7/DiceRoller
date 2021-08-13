@@ -53,6 +53,7 @@ public class RollHistoryActivity extends AppCompatActivity {
     }
 
     private void loadUI() {
+        // load recycler view and set the adapter with previos history
         RecyclerView historyView = new RecyclerView(this);
         historyView = findViewById(R.id.rv_dices_history);
         adapter = new RollHistoryAdapter(this, mRollInfoList);
@@ -95,6 +96,8 @@ public class RollHistoryActivity extends AppCompatActivity {
     }
 
     private void convertToArrayList() {
+
+        // convert the hashmap into a array list suitable for the adapter..
         if (mInfos == null)
             return;
         for (Map.Entry<Integer, ArrayList<Integer>> item : mInfos.entrySet()) {
@@ -109,6 +112,7 @@ public class RollHistoryActivity extends AppCompatActivity {
     }
 
     private void clearHistory() {
+        // clear the data..
         mRollInfoList.clear();
         mInfos.clear();
         loadHistory();
