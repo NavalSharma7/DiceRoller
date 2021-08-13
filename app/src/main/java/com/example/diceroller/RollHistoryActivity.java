@@ -108,6 +108,8 @@ public class RollHistoryActivity extends AppCompatActivity {
 
     private void clearHistory() {
         PreferenceManager.getDefaultSharedPreferences(this).edit().clear().apply();
+        mRollInfoList.clear();
+        mInfos.clear();
         loadHistory();
         adapter.setDiceList(mRollInfoList);
         adapter.notifyDataSetChanged();

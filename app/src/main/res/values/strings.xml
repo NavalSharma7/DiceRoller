@@ -21,7 +21,7 @@
     <string name="enter_the_sides_of_custom_dice_max_250">Enter the sides of Custom dice</string>
     <string name="show_rolling_history">SHOW ROLLING HISTORY</string>
     <string name="clear_rolling_history">Clear rolling history</string>
-    <string name="no_rolling_history_please_roll_dices_to_see">NO ROLLING HISTORY PLEASE ROLL DICES TO SEE</string>
+    <string name="no_rolling_history_please_roll_dices_to_see">NO ROLLING HISTORY PLEASE ROLL DICES</string>
     <string name="rolling_history">Rolling History</string>
     <string name="you_have_chosen_a">You have chosen a</string>
     <string name="choose_how_many_times_to_roll">CHOOSE HOW MANY TIMES TO ROLL</string>
