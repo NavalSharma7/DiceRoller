@@ -136,7 +136,7 @@ public class DiceRollActivity extends AppCompatActivity {
         // method to load arraylist from shared prefs
         // initializing our shared prefs with name as
         // shared preferences.
-        SharedPreferences sharedPreferences = getSharedPreferences("dice_roll", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
 
         // creating a variable for gson.
         Gson gson = new Gson();
@@ -163,7 +163,7 @@ public class DiceRollActivity extends AppCompatActivity {
 
     public <T> void setList(String key, HashMap<Integer,ArrayList<Integer>> list) {
 
-        SharedPreferences sharedPreferences = getSharedPreferences("dice_roll", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();

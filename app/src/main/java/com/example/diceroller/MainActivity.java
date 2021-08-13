@@ -35,16 +35,15 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
 
     private void init() {
         RecyclerView dicesView = new RecyclerView(this);
-        // get the dices data from shared preferences
 
-        //get the dice list save data once to add default dice lists to the shared preferences.
+        // get the list from datamodel with default values
         mDiceList = DataModel.getDiceList();
-
-        loadData();
-
         // save the default dices in the shared preferences.
         saveData();
 
+        // get the dices data from shared preferences
+
+        loadData();
         dicesView = findViewById(R.id.rv_dices);
         //set the adapter
         mAdapter = new DiceAdapter(this, mDiceList, new DiceAdapter.clickItemListener() {
@@ -72,9 +71,6 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
                 FragmentManager fm = getSupportFragmentManager();
                 CustomDiceDialog customDiceDialog = CustomDiceDialog.newInstance();
                 customDiceDialog.show(fm, "fragment_custom_dice");
-
-
-
 
 
             }
@@ -140,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
         // creating a new variable for gson.
         Gson gson = new Gson();
 
+
         // getting data from gson and storing it in a string.
         String json = gson.toJson(mDiceList);
 
@@ -151,8 +148,6 @@ public class MainActivity extends AppCompatActivity implements CustomDiceDialog.
         // and save data in shared prefs.
         editor.apply();
 
-        // after saving data we are displaying a toast message.
-        Toast.makeText(this, "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
     }
 
     private void clearData() {
